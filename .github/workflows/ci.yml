@@ -1,0 +1,45 @@
+---
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  standard:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - name: Setup ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 3.0
+          bundler-cache: true
+      - name: Run static code analysis
+        run: bundle exec standardrb
+  unit:
+    runs-on: ubuntu-latest
+    needs: standard
+    strategy:
+      matrix:
+        ruby:
+          - "2.6"
+          - "2.7"
+          - "3.0"
+          - "3.1"
+          - "3.2"
+          - "3.3"
+    name: Ruby ${{ matrix.ruby }}
+    steps:
+      - uses: actions/checkout@v6
+      - name: Setup ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: ${{ matrix.ruby }}
+          bundler-cache: true
+      - name: Run tests without uploading code coverage
+        run: bundle exec rake
