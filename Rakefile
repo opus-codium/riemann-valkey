@@ -1,3 +1,6 @@
+# Managed by modulesync - DO NOT EDIT
+# See: https://github.com/opus-codium/modulesync_riemann
+
 # frozen_string_literal: true
 
 require "riemann/tools/valkey/version"
@@ -14,7 +17,7 @@ require "github_changelog_generator/task"
 GitHubChangelogGenerator::RakeTask.new :changelog do |config|
   config.user = "opus-codium"
   config.project = "riemann-valkey"
-  config.exclude_labels = %w[dependencies skip-changelog]
-  config.future_release = "v#{Riemann::Tools::Valkey::VERSION}"
+  config.exclude_labels = ["dependencies", "skip-changelog"]
+  config.future_release = Riemann::Tools::Valkey::VERSION
   config.since_tag = "v1.0.0"
 end
