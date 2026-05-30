@@ -3,7 +3,7 @@
 require "riemann/tools/valkey"
 
 RSpec.describe Riemann::Tools::Valkey do
-  subject(:tool) { described_class.new }
+  let(:tool) { described_class.new }
 
   let(:info) do
     {
@@ -44,7 +44,7 @@ RSpec.describe Riemann::Tools::Valkey do
       end
     end
 
-    context "with intemediate memory usage" do
+    context "with high memory usage" do
       let(:info) do
         {
           "used_memory" => "127000000",
