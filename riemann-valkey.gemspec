@@ -31,5 +31,5 @@ Gem::Specification.new do |spec|
   spec.require_paths = ["lib"]
 
   spec.add_dependency "redis", "~> 5.0"
-  spec.add_dependency "riemann-tools", "~> 1.0"
+  spec.add_dependency "riemann-tools", ">= 1", "< 3"
 end
